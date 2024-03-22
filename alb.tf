@@ -298,25 +298,8 @@ resource "aws_instance" "instance_c" { //Instance C
              sudo systemctl reload nginx
              EOF
 }
-Note: Since this post focuses on ALB, I have not covered the VPC networking part here. The example uses default VPCs and Subnets. See how to configure VPC networking using Terraform.
 
-Testing the EC2 instances
-Make sure you have three EC2 instances running in one AZ each, as seen in the screenshot below.
 
-terraform aws alb
-Access the homepage for Instance A, ./images/ path for Instance B and ./register/ path for Instance C. All of them should respond with an appropriate message displayed on the web page, as seen below.
-
-terraform aws alb module
-You should get the same result if your instance configuration is correct.
-
-2. Create an ALB Target Group
-Target groups – as the name suggests, are used to group compute resources that serve a single responsibility/purpose. 
-
-In this example, resources that are part of each target group serve requests sent on a specific path. The Target Groups are described below:
-
-Target Group A – is a group of instances that serves all the incoming requests targeted towards the home page, as well as all those requests that are not served by other target groups.
-Target Group B – is a group of instances that serves all the incoming requests made on the /images path.
-Target Group C – is a group of instances that serves all the incoming requests made on the /register path.
 // Target groups
 resource "aws_lb_target_group" "my_tg_a" { // Target Group A
  name     = "target-group-a"
