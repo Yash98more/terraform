@@ -163,3 +163,60 @@ resource "aws_lb_target_group_attachment" "tg_attachment_c" {
  target_id        = aws_instance.instance_c.id
  port             = 80
 }
+
+
+resource "aws_lb" "my_alb" {
+ name               = "my-alb"
+ internal           = false
+ load_balancer_type = "application"
+ security_groups    = sg-040ebdb207a22784f
+ subnets            = ["subnet-0b0026bf0a7b9cde0", "subnet-04ce27849ad34a574", "subnet-0cdc3f233d4530337"]
+
+ tags = {
+   Environment = "dev"
+ }
+}
+
+resource "aws_lb_listener" "my_alb_listener" {
+ load_balancer_arn = aws_lb.my_alb.arn
+ port              = "80"
+ protocol          = "HTTP"
+
+ default_action {
+   type             = "forward"
+   target_group_arn = aws_lb_target_group.my_tg_a.arn
+ }
+}
+
+
+resource "aws_lb_listener_rule" "rule_b" {
+ listener_arn = aws_lb_listener.my_alb_listener.arn
+ priority     = 60
+
+ action {
+   type             = "forward"
+   target_group_arn = aws_lb_target_group.my_tg_b.arn
+ }
+
+ condition {
+   path_pattern {
+     values = ["/images*"]
+   }
+ }
+}
+
+resource "aws_lb_listener_rule" "rule_c" {
+ listener_arn = aws_lb_listener.my_alb_listener.arn
+ priority     = 40
+
+ action {
+   type             = "forward"
+   target_group_arn = aws_lb_target_group.my_tg_c.arn
+ }
+
+ condition {
+   path_pattern {
+     values = ["/register*"]
+   }
+ }
+}
