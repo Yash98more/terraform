@@ -1,10 +1,27 @@
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.42.0"
+    }
+  }
+}
+
+ provider "aws" {
+  region = "ap-northeast-1"
+  shared_config_files      = ["/home/ubuntu/.aws/config"]
+  shared_credentials_files = ["/home/ubuntu/.aws/credentials"]
+  profile = "yash"
+}
+
+
 resource "aws_instance" "instance_a" { //Instance A
- ami           = var.ami
+ ami           = "ami-0eba6c58b7918d3a1"
  instance_type = "t2.micro"
 
- subnet_id = var.subnet_a
+ subnet_id = "subnet-0b0026bf0a7b9cde0"
 
- key_name = "tfserverkey"
+ key_name = "marsadiz"
 
  tags = {
    Name = "Instance A"
@@ -24,12 +41,12 @@ resource "aws_instance" "instance_a" { //Instance A
 }
 
 resource "aws_instance" "instance_b" { //Instance B
- ami           = var.ami
+ ami           = "ami-0eba6c58b7918d3a1"
  instance_type = "t2.micro"
 
- subnet_id = var.subnet_b
+ subnet_id = "subnet-04ce27849ad34a574"
 
- key_name = "tfserverkey"
+ key_name = "marsadiz"
 
  tags = {
    Name = "Instance B"
@@ -64,12 +81,12 @@ resource "aws_instance" "instance_b" { //Instance B
 }
 
 resource "aws_instance" "instance_c" { //Instance C
- ami           = var.ami
+ ami           = "ami-0eba6c58b7918d3a1"
  instance_type = "t2.micro"
 
- subnet_id = var.subnet_c
+ subnet_id = "subnet-0cdc3f233d4530337"
 
- key_name = "tfserverkey"
+ key_name = "marsadiz"
 
  tags = {
    Name = "Instance C"
