@@ -169,7 +169,7 @@ resource "aws_lb" "my_alb" {
  name               = "my-alb"
  internal           = false
  load_balancer_type = "application"
- security_groups    = sg-040ebdb207a22784f
+ security_groups    = "sg-040ebdb207a22784f"
  subnets            = ["subnet-0b0026bf0a7b9cde0", "subnet-04ce27849ad34a574", "subnet-0cdc3f233d4530337"]
 
  tags = {
