@@ -305,21 +305,21 @@ resource "aws_lb_target_group" "my_tg_a" { // Target Group A
  name     = "target-group-a"
  port     = 80
  protocol = "HTTP"
- vpc_id   = var.vpc_id
+ vpc_id   = "vpc-019705ca0646f00cd"
 }
 
 resource "aws_lb_target_group" "my_tg_b" { // Target Group B
  name     = "target-group-b"
  port     = 80
  protocol = "HTTP"
- vpc_id   = var.vpc_id
+ vpc_id   = "vpc-019705ca0646f00cd"
 }
 
 resource "aws_lb_target_group" "my_tg_c" { // Target Group C
  name     = "target-group-c"
  port     = 80
  protocol = "HTTP"
- vpc_id   = var.vpc_id
+ vpc_id   = "vpc-019705ca0646f00cd"
 }
 
 
